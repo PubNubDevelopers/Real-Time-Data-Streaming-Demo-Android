@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Real Time</string>
+    <string name="title_activity_twitter_messages">TwitterMessages</string>
+    <string name="twitter">Twitter (X)</string>
+    <string name="back_button">Back</string>
+    <string name="wikipedia">Wikipedia</string>
+    <string name="game_state">Game State (Sim)</string>
+    <string name="sensor_network">Sensor Network (Sim)</string>
+    <string name="market_orders">Market Orders (Sim)</string>
+    <string name="launcher">Choose Stream</string>
+</resources>
