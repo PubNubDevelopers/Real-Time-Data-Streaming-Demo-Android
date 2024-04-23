@@ -1,6 +1,7 @@
 package com.pubnub.devrel.realtimestreaming.ui.screens
 
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -25,12 +26,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.pubnub.devrel.realtimestreaming.R
-import com.pubnub.devrel.realtimestreaming.Messages.MessageGameState
+import com.pubnub.devrel.realtimestreaming.messages.MessageGameState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 
+@SuppressLint("SimpleDateFormat")
 @Composable
 fun GameStateScreen(messageListData : SnapshotStateList<MessageGameState>, messageListState : LazyListState,
                     coroutineScope: CoroutineScope, continueVisible: Boolean) {
@@ -112,7 +114,7 @@ fun GameStateScreen(messageListData : SnapshotStateList<MessageGameState>, messa
                     .padding(horizontal = 8.dp, vertical = 2.dp))
                 {
                     Text("Coordinates: ", style= MaterialTheme.typography.titleMedium)
-                    Text("x = ${item.coord_X}, y = ${item.coord_Y}", style= MaterialTheme.typography.bodyLarge)
+                    Text("x = ${item.coordX}, y = ${item.coordY}", style= MaterialTheme.typography.bodyLarge)
                 }
                 Row (modifier = Modifier
                     .background(backgroundColor)
@@ -121,9 +123,9 @@ fun GameStateScreen(messageListData : SnapshotStateList<MessageGameState>, messa
                     .padding(horizontal = 8.dp, vertical = 10.dp))
                 {
                     Text("Timestamp: ", style= MaterialTheme.typography.titleMedium)
-                    val sdf = SimpleDateFormat("yyyy MM dd HH:mm:ss")
+                    val sdf = SimpleDateFormat("yyyy MMMM dd HH:mm:ss")
                     val messageDate = item.timetoken?.let { Date(it/10000) }
-                    Text(sdf.format(messageDate), style= MaterialTheme.typography.bodyLarge)
+                    Text(sdf.format(messageDate) , style= MaterialTheme.typography.bodyLarge)
                 }
             }
         }

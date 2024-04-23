@@ -25,7 +25,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.pubnub.devrel.realtimestreaming.R
-import com.pubnub.devrel.realtimestreaming.Messages.MessageMarketOrders
+import com.pubnub.devrel.realtimestreaming.messages.MessageMarketOrders
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -121,7 +121,7 @@ fun MarketOrdersScreen(messageListData : SnapshotStateList<MessageMarketOrders>,
                     .padding(horizontal = 8.dp, vertical = 10.dp))
                 {
                     Text("Timestamp: ", style= MaterialTheme.typography.titleMedium)
-                    val sdf = SimpleDateFormat("yyyy MM dd HH:mm:ss")
+                    val sdf = SimpleDateFormat("yyyy MMMM dd HH:mm:ss")
                     val messageDate = item.timetoken?.let { Date(it/10000) }
                     Text(sdf.format(messageDate), style= MaterialTheme.typography.bodyLarge)
                 }

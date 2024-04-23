@@ -9,12 +9,12 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult
 import com.pubnub.api.v2.subscriptions.Subscription
-import com.pubnub.devrel.realtimestreaming.Messages.MessageGameState
-import com.pubnub.devrel.realtimestreaming.Messages.MessageMarketOrders
-import com.pubnub.devrel.realtimestreaming.Messages.MessageSensorNetwork
-import com.pubnub.devrel.realtimestreaming.Messages.MessageTwitter
-import com.pubnub.devrel.realtimestreaming.Messages.MessageWikipedia
 import com.pubnub.devrel.realtimestreaming.RealTimeStream
+import com.pubnub.devrel.realtimestreaming.messages.MessageGameState
+import com.pubnub.devrel.realtimestreaming.messages.MessageMarketOrders
+import com.pubnub.devrel.realtimestreaming.messages.MessageSensorNetwork
+import com.pubnub.devrel.realtimestreaming.messages.MessageTwitter
+import com.pubnub.devrel.realtimestreaming.messages.MessageWikipedia
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -50,7 +50,7 @@ class StreamingViewModel : ViewModel() {
 
     private fun cancelStreams()
     {
-        for ((key, value) in channelSubscriptions) {
+        for ((_, value) in channelSubscriptions) {
             value.unsubscribe()
         }
     }
@@ -72,7 +72,7 @@ class StreamingViewModel : ViewModel() {
         {
             val message = JSONObject(pnMessageResult.message.toString())
             val user = JSONObject(message.get("user").toString())
-            var place = JSONObject(message.get("place").toString())
+            val place = JSONObject(message.get("place").toString())
             val twitterMessage = MessageTwitter(user.getString("screen_name"),
                 message.getString("id_str"), message.getString("text"),
                 message.getString("source").replace("<a .*\">".toRegex(), "").replace("</a>", ""), place.getString("country"),

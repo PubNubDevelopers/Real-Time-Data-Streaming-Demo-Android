@@ -26,7 +26,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.pubnub.devrel.realtimestreaming.R
-import com.pubnub.devrel.realtimestreaming.Messages.MessageWikipedia
+import com.pubnub.devrel.realtimestreaming.messages.MessageWikipedia
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -122,7 +122,7 @@ fun WikipediaScreen(messageListData : SnapshotStateList<MessageWikipedia>, messa
                     .padding(horizontal = 8.dp, vertical = 2.dp))
                 {
                     Text("Timestamp: ", style= MaterialTheme.typography.titleMedium)
-                    val sdf = SimpleDateFormat("yyyy MM dd HH:mm:ss")
+                    val sdf = SimpleDateFormat("yyyy MMMM dd HH:mm:ss")
                     val messageDate = item.timetoken?.let { Date(it/10000) }
                     Text(sdf.format(messageDate), style= MaterialTheme.typography.bodyLarge)
                 }

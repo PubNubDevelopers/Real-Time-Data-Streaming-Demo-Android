@@ -61,7 +61,7 @@ fun RealTimeAppBar(
     modifier: Modifier = Modifier
 ) {
     TopAppBar(
-        title = { Row(){Text(stringResource(currentScreen.title)) }},
+        title = { Row {Text(stringResource(currentScreen.title)) }},
         colors = TopAppBarDefaults.mediumTopAppBarColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer
         ),

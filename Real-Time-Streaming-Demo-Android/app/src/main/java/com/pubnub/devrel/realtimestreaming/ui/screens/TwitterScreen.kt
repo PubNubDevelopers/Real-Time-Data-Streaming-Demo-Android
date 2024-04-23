@@ -25,7 +25,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.pubnub.devrel.realtimestreaming.R
-import com.pubnub.devrel.realtimestreaming.Messages.MessageTwitter
+import com.pubnub.devrel.realtimestreaming.messages.MessageTwitter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
