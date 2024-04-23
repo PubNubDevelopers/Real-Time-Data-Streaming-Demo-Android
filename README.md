@@ -14,8 +14,6 @@ We’ve built sample realtime data streams to make it easy for you to prototype 
 
 To run this project yourself, simply clone this repository, open it in Android Studio and run it on your own device or emulator.  You do not need your own Publish and Subscribe keys because you are only subscribing to existing data streams.
 
-## Other screenshots
-
 ### Building and Running
 
 - Clone the Github repository
@@ -44,7 +42,7 @@ Checkout the following links for more information on developing chat solutions w
 - Data streaming with a web / JS app (demo): https://www.pubnub.com/demos/real-time-data-streaming/
 - Data streaming with a web / JS app (source): https://github.com/PubNubDevelopers/Real-Time-Data-Streaming-Demo 
 
-
+## Other screenshots
 
 ### Twitter
 
