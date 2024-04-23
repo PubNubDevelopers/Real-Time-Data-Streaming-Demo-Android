@@ -1,4 +1,4 @@
-package com.pubnub.devrel.realtimestreaming
+package com.darryncampbell.devrel.realtimestreaming
 
 import android.os.Bundle
 import android.provider.Settings
@@ -6,6 +6,8 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.darryncampbell.devrel.realtimestreaming.ui.StreamingViewModel
+import com.darryncampbell.devrel.realtimestreaming.ui.theme.RealTimeStreamingTheme
 import com.pubnub.api.PubNub
 import com.pubnub.api.UserId
 import com.pubnub.api.callbacks.Listener
@@ -13,8 +15,6 @@ import com.pubnub.api.callbacks.SubscribeCallback
 import com.pubnub.api.models.consumer.PNStatus
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult
 import com.pubnub.api.v2.PNConfiguration
-import com.pubnub.devrel.realtimestreaming.ui.StreamingViewModel
-import com.pubnub.devrel.realtimestreaming.ui.theme.RealTimeStreamingTheme
 
 class MainActivity : ComponentActivity() {
 

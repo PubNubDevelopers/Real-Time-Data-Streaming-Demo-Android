@@ -1,4 +1,4 @@
-package com.pubnub.devrel.realtimestreaming.ui.screens
+package com.darryncampbell.devrel.realtimestreaming.ui.screens
 
 
 import android.annotation.SuppressLint
@@ -25,8 +25,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.pubnub.devrel.realtimestreaming.R
-import com.pubnub.devrel.realtimestreaming.messages.MessageGameState
+import com.darryncampbell.devrel.realtimestreaming.messages.MessageGameState
+import com.darryncampbell.devrel.realtimestreaming.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat

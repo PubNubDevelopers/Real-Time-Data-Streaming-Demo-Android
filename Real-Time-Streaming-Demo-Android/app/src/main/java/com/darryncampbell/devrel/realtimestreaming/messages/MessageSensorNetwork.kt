@@ -1,4 +1,4 @@
-package com.pubnub.devrel.realtimestreaming.messages
+package com.darryncampbell.devrel.realtimestreaming.messages
 
 class MessageSensorNetwork(val temperature: Double,
                            val humidity: Double,

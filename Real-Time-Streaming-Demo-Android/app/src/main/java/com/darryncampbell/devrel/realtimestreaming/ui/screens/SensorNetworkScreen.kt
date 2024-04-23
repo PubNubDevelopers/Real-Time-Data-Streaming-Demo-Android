@@ -1,11 +1,11 @@
-package com.pubnub.devrel.realtimestreaming.ui.screens
+package com.darryncampbell.devrel.realtimestreaming.ui.screens
+
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,16 +24,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.pubnub.devrel.realtimestreaming.R
-import com.pubnub.devrel.realtimestreaming.messages.MessageTwitter
+import com.darryncampbell.devrel.realtimestreaming.R
+import com.darryncampbell.devrel.realtimestreaming.messages.MessageSensorNetwork
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 
 @Composable
-fun TwitterScreen(messageListData : SnapshotStateList<MessageTwitter>, messageListState : LazyListState,
-                  coroutineScope: CoroutineScope, continueVisible: Boolean) {
+fun SensorNetworkScreen(messageListData : SnapshotStateList<MessageSensorNetwork>, messageListState : LazyListState,
+                        coroutineScope: CoroutineScope, continueVisible: Boolean) {
     Column(modifier = Modifier.fillMaxSize())
     {
         if (continueVisible) {
@@ -56,7 +56,7 @@ fun TwitterScreen(messageListData : SnapshotStateList<MessageTwitter>, messageLi
         }
         LazyColumn (
             state = messageListState,
-            modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+            modifier = Modifier.fillMaxWidth().fillMaxHeight().background(MaterialTheme.colorScheme.surface),
             //contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
         ) {
             itemsIndexed(messageListData) {index, item ->
@@ -65,18 +65,18 @@ fun TwitterScreen(messageListData : SnapshotStateList<MessageTwitter>, messageLi
                     .fillMaxWidth()
                     .background(backgroundColor)
                     .wrapContentHeight()
-                    .padding(horizontal = 16.dp, vertical = 2.dp))
+                    .padding(horizontal = 16.dp, vertical = 10.dp))
                 {
                     Image(
-                        painter = painterResource(R.drawable.social_icon),
-                        contentDescription = "Social Icon",
+                        painter = painterResource(R.drawable.iot_icon),
+                        contentDescription = "IoT Icon",
                         contentScale = ContentScale.FillBounds,
                         modifier = Modifier
                             .height(30.dp)
                             .width(30.dp)
                     )
                     Text("Source: ", style= MaterialTheme.typography.titleMedium)
-                    Text("Twitter (X)", style= MaterialTheme.typography.bodyLarge)
+                    Text("Sensor Network (Simulated)", style= MaterialTheme.typography.bodyLarge)
                 }
                 Row (modifier = Modifier
                     .background(backgroundColor)
@@ -84,8 +84,8 @@ fun TwitterScreen(messageListData : SnapshotStateList<MessageTwitter>, messageLi
                     .wrapContentHeight()
                     .padding(horizontal = 8.dp, vertical = 2.dp))
                 {
-                    Text("Post: ", style= MaterialTheme.typography.titleMedium)
-                    Text(item.messageText, style= MaterialTheme.typography.bodyLarge)
+                    Text("Ambient Temperature: ", style= MaterialTheme.typography.titleMedium)
+                    Text("${item.temperature}°c" , style= MaterialTheme.typography.bodyLarge)
                 }
                 Row (modifier = Modifier
                     .background(backgroundColor)
@@ -93,8 +93,8 @@ fun TwitterScreen(messageListData : SnapshotStateList<MessageTwitter>, messageLi
                     .wrapContentHeight()
                     .padding(horizontal = 8.dp, vertical = 2.dp))
                 {
-                    Text("Posted from: ", style= MaterialTheme.typography.titleMedium)
-                    Text(item.messageSource, style= MaterialTheme.typography.bodyLarge)
+                    Text("Humidity: ", style= MaterialTheme.typography.titleMedium)
+                    Text("${item.humidity}%", style= MaterialTheme.typography.bodyLarge)
                 }
                 Row (modifier = Modifier
                     .background(backgroundColor)
@@ -102,8 +102,8 @@ fun TwitterScreen(messageListData : SnapshotStateList<MessageTwitter>, messageLi
                     .wrapContentHeight()
                     .padding(horizontal = 8.dp, vertical = 2.dp))
                 {
-                    Text("Tweeted from location: ", style= MaterialTheme.typography.titleMedium)
-                    Text(item.messageCountry, style= MaterialTheme.typography.bodyLarge)
+                    Text("Photosensor: ", style= MaterialTheme.typography.titleMedium)
+                    Text("${item.photosensor} w/m2", style= MaterialTheme.typography.bodyLarge)
                 }
                 Row (modifier = Modifier
                     .background(backgroundColor)
@@ -111,8 +111,8 @@ fun TwitterScreen(messageListData : SnapshotStateList<MessageTwitter>, messageLi
                     .wrapContentHeight()
                     .padding(horizontal = 8.dp, vertical = 2.dp))
                 {
-                    Text("User name: ", style= MaterialTheme.typography.titleMedium)
-                    Text(item.senderScreenName, style= MaterialTheme.typography.bodyLarge)
+                    Text("Radiation Level: ", style= MaterialTheme.typography.titleMedium)
+                    Text("${item.radiation} millirads/hr", style= MaterialTheme.typography.bodyLarge)
                 }
                 Row (modifier = Modifier
                     .background(backgroundColor)
@@ -120,30 +120,20 @@ fun TwitterScreen(messageListData : SnapshotStateList<MessageTwitter>, messageLi
                     .wrapContentHeight()
                     .padding(horizontal = 8.dp, vertical = 2.dp))
                 {
-                    Text("Profile location: ", style= MaterialTheme.typography.titleMedium)
-                    Text(item.senderLocation, style= MaterialTheme.typography.bodyLarge)
+                    Text("Sensor ID: ", style= MaterialTheme.typography.titleMedium)
+                    Text(item.sensorId, style= MaterialTheme.typography.bodyLarge)
                 }
                 Row (modifier = Modifier
                     .background(backgroundColor)
                     .fillMaxWidth()
                     .wrapContentHeight()
-                    .padding(horizontal = 8.dp, vertical = 2.dp))
-                {
-                    Text("Follower count: ", style= MaterialTheme.typography.titleMedium)
-                    Text(item.senderFollowerCount.toString(), style= MaterialTheme.typography.bodyLarge)
-                }
-                Row (modifier = Modifier
-                    .background(backgroundColor)
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .padding(horizontal = 8.dp, vertical = 2.dp))
+                    .padding(horizontal = 8.dp, vertical = 10.dp))
                 {
                     Text("Timestamp: ", style= MaterialTheme.typography.titleMedium)
-                    val sdf = SimpleDateFormat("HH:mm:ss")
+                    val sdf = SimpleDateFormat("yyyy MMMM dd HH:mm:ss")
                     val messageDate = item.timetoken?.let { Date(it/10000) }
                     Text(sdf.format(messageDate), style= MaterialTheme.typography.bodyLarge)
                 }
-                Spacer(modifier = Modifier.height(20.dp))
             }
         }
     }

@@ -1,11 +1,11 @@
-package com.pubnub.devrel.realtimestreaming.ui.screens
-
+package com.darryncampbell.devrel.realtimestreaming.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,16 +24,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.pubnub.devrel.realtimestreaming.R
-import com.pubnub.devrel.realtimestreaming.messages.MessageMarketOrders
+import com.darryncampbell.devrel.realtimestreaming.R
+import com.darryncampbell.devrel.realtimestreaming.messages.MessageTwitter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 
 @Composable
-fun MarketOrdersScreen(messageListData : SnapshotStateList<MessageMarketOrders>, messageListState : LazyListState,
-                       coroutineScope: CoroutineScope, continueVisible: Boolean) {
+fun TwitterScreen(messageListData : SnapshotStateList<MessageTwitter>, messageListState : LazyListState,
+                  coroutineScope: CoroutineScope, continueVisible: Boolean) {
     Column(modifier = Modifier.fillMaxSize())
     {
         if (continueVisible) {
@@ -56,7 +56,7 @@ fun MarketOrdersScreen(messageListData : SnapshotStateList<MessageMarketOrders>,
         }
         LazyColumn (
             state = messageListState,
-            modifier = Modifier.fillMaxWidth().fillMaxHeight().background(MaterialTheme.colorScheme.surface),
+            modifier = Modifier.fillMaxWidth().fillMaxHeight(),
             //contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
         ) {
             itemsIndexed(messageListData) {index, item ->
@@ -65,18 +65,18 @@ fun MarketOrdersScreen(messageListData : SnapshotStateList<MessageMarketOrders>,
                     .fillMaxWidth()
                     .background(backgroundColor)
                     .wrapContentHeight()
-                    .padding(horizontal = 16.dp, vertical = 10.dp))
+                    .padding(horizontal = 16.dp, vertical = 2.dp))
                 {
                     Image(
-                        painter = painterResource(R.drawable.regulations_icon),
-                        contentDescription = "Regulations Icon",
+                        painter = painterResource(R.drawable.social_icon),
+                        contentDescription = "Social Icon",
                         contentScale = ContentScale.FillBounds,
                         modifier = Modifier
                             .height(30.dp)
                             .width(30.dp)
                     )
                     Text("Source: ", style= MaterialTheme.typography.titleMedium)
-                    Text("Market Orders (Simulated)", style= MaterialTheme.typography.bodyLarge)
+                    Text("Twitter (X)", style= MaterialTheme.typography.bodyLarge)
                 }
                 Row (modifier = Modifier
                     .background(backgroundColor)
@@ -84,8 +84,8 @@ fun MarketOrdersScreen(messageListData : SnapshotStateList<MessageMarketOrders>,
                     .wrapContentHeight()
                     .padding(horizontal = 8.dp, vertical = 2.dp))
                 {
-                    Text("Stock: ", style= MaterialTheme.typography.titleMedium)
-                    Text(item.stock, style= MaterialTheme.typography.bodyLarge)
+                    Text("Post: ", style= MaterialTheme.typography.titleMedium)
+                    Text(item.messageText, style= MaterialTheme.typography.bodyLarge)
                 }
                 Row (modifier = Modifier
                     .background(backgroundColor)
@@ -93,8 +93,8 @@ fun MarketOrdersScreen(messageListData : SnapshotStateList<MessageMarketOrders>,
                     .wrapContentHeight()
                     .padding(horizontal = 8.dp, vertical = 2.dp))
                 {
-                    Text("Bid Price: ", style= MaterialTheme.typography.titleMedium)
-                    Text("${item.bidPrice}", style= MaterialTheme.typography.bodyLarge)
+                    Text("Posted from: ", style= MaterialTheme.typography.titleMedium)
+                    Text(item.messageSource, style= MaterialTheme.typography.bodyLarge)
                 }
                 Row (modifier = Modifier
                     .background(backgroundColor)
@@ -102,8 +102,8 @@ fun MarketOrdersScreen(messageListData : SnapshotStateList<MessageMarketOrders>,
                     .wrapContentHeight()
                     .padding(horizontal = 8.dp, vertical = 2.dp))
                 {
-                    Text("Order Quantity: ", style= MaterialTheme.typography.titleMedium)
-                    Text("${item.orderQuantity}", style= MaterialTheme.typography.bodyLarge)
+                    Text("Tweeted from location: ", style= MaterialTheme.typography.titleMedium)
+                    Text(item.messageCountry, style= MaterialTheme.typography.bodyLarge)
                 }
                 Row (modifier = Modifier
                     .background(backgroundColor)
@@ -111,20 +111,39 @@ fun MarketOrdersScreen(messageListData : SnapshotStateList<MessageMarketOrders>,
                     .wrapContentHeight()
                     .padding(horizontal = 8.dp, vertical = 2.dp))
                 {
-                    Text("Trade Type: ", style= MaterialTheme.typography.titleMedium)
-                    Text(item.tradeType, style= MaterialTheme.typography.bodyLarge)
+                    Text("User name: ", style= MaterialTheme.typography.titleMedium)
+                    Text(item.senderScreenName, style= MaterialTheme.typography.bodyLarge)
                 }
                 Row (modifier = Modifier
                     .background(backgroundColor)
                     .fillMaxWidth()
                     .wrapContentHeight()
-                    .padding(horizontal = 8.dp, vertical = 10.dp))
+                    .padding(horizontal = 8.dp, vertical = 2.dp))
+                {
+                    Text("Profile location: ", style= MaterialTheme.typography.titleMedium)
+                    Text(item.senderLocation, style= MaterialTheme.typography.bodyLarge)
+                }
+                Row (modifier = Modifier
+                    .background(backgroundColor)
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(horizontal = 8.dp, vertical = 2.dp))
+                {
+                    Text("Follower count: ", style= MaterialTheme.typography.titleMedium)
+                    Text(item.senderFollowerCount.toString(), style= MaterialTheme.typography.bodyLarge)
+                }
+                Row (modifier = Modifier
+                    .background(backgroundColor)
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(horizontal = 8.dp, vertical = 2.dp))
                 {
                     Text("Timestamp: ", style= MaterialTheme.typography.titleMedium)
-                    val sdf = SimpleDateFormat("yyyy MMMM dd HH:mm:ss")
+                    val sdf = SimpleDateFormat("HH:mm:ss")
                     val messageDate = item.timetoken?.let { Date(it/10000) }
                     Text(sdf.format(messageDate), style= MaterialTheme.typography.bodyLarge)
                 }
+                Spacer(modifier = Modifier.height(20.dp))
             }
         }
     }

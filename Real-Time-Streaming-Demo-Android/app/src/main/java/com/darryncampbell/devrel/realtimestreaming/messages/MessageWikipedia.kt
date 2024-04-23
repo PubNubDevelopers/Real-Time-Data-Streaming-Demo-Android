@@ -1,4 +1,4 @@
-package com.pubnub.devrel.realtimestreaming.messages
+package com.darryncampbell.devrel.realtimestreaming.messages
 
 class MessageWikipedia(val eventType: String,
                        val changedItem: String, val link: String, val username: String,

@@ -1,4 +1,4 @@
-package com.pubnub.devrel.realtimestreaming
+package com.darryncampbell.devrel.realtimestreaming
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,13 +26,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.pubnub.devrel.realtimestreaming.ui.StreamingViewModel
-import com.pubnub.devrel.realtimestreaming.ui.screens.GameStateScreen
-import com.pubnub.devrel.realtimestreaming.ui.screens.LauncherScreen
-import com.pubnub.devrel.realtimestreaming.ui.screens.MarketOrdersScreen
-import com.pubnub.devrel.realtimestreaming.ui.screens.SensorNetworkScreen
-import com.pubnub.devrel.realtimestreaming.ui.screens.TwitterScreen
-import com.pubnub.devrel.realtimestreaming.ui.screens.WikipediaScreen
+import com.darryncampbell.devrel.realtimestreaming.ui.StreamingViewModel
+import com.darryncampbell.devrel.realtimestreaming.ui.screens.GameStateScreen
+import com.darryncampbell.devrel.realtimestreaming.ui.screens.LauncherScreen
+import com.darryncampbell.devrel.realtimestreaming.ui.screens.MarketOrdersScreen
+import com.darryncampbell.devrel.realtimestreaming.ui.screens.SensorNetworkScreen
+import com.darryncampbell.devrel.realtimestreaming.ui.screens.TwitterScreen
+import com.darryncampbell.devrel.realtimestreaming.ui.screens.WikipediaScreen
 import kotlinx.coroutines.CoroutineScope
 
 private lateinit var coroutineScope: CoroutineScope
@@ -95,13 +95,17 @@ fun RealTimeApp(
     val currentScreen = RealTimeStream.valueOf(
         backStackEntry?.destination?.route ?: RealTimeStream.Start.name
     )
+    if (currentScreen == RealTimeStream.Start)
+    {
+        viewModel.setActiveStream(RealTimeStream.Start);
+    }
 
     Scaffold(
         topBar = {
             RealTimeAppBar(
                 currentScreen = currentScreen,
                 canNavigateBack = navController.previousBackStackEntry != null,
-                navigateUp = { navController.navigateUp();viewModel.setActiveStream(RealTimeStream.Start); }
+                navigateUp = { navController.navigateUp(); }
             )
         }
     ) { innerPadding ->

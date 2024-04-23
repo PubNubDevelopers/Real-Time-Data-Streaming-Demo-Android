@@ -15,7 +15,7 @@
         android:theme="@style/Theme.RealTimeStreaming"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name="com.darryncampbell.devrel.realtimestreaming.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.RealTimeStreaming">
             <intent-filter>

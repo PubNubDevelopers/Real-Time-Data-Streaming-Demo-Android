@@ -1,4 +1,4 @@
-package com.pubnub.devrel.realtimestreaming.ui.theme
+package com.darryncampbell.devrel.realtimestreaming.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

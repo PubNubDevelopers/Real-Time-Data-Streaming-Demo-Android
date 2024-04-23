@@ -1,4 +1,4 @@
-package com.pubnub.devrel.realtimestreaming.ui.screens
+package com.darryncampbell.devrel.realtimestreaming.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -20,7 +20,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.pubnub.devrel.realtimestreaming.R
+import com.darryncampbell.devrel.realtimestreaming.R
 
 @Composable
 fun LauncherScreen(onTwitterButtonClicked: () -> Unit,

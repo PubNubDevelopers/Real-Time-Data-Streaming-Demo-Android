@@ -1,4 +1,4 @@
-package com.pubnub.devrel.realtimestreaming.ui.screens
+package com.darryncampbell.devrel.realtimestreaming.ui.screens
 
 
 import androidx.compose.foundation.Image
@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,16 +25,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.pubnub.devrel.realtimestreaming.R
-import com.pubnub.devrel.realtimestreaming.messages.MessageSensorNetwork
+import com.darryncampbell.devrel.realtimestreaming.messages.MessageWikipedia
+import com.darryncampbell.devrel.realtimestreaming.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 
 @Composable
-fun SensorNetworkScreen(messageListData : SnapshotStateList<MessageSensorNetwork>, messageListState : LazyListState,
-                        coroutineScope: CoroutineScope, continueVisible: Boolean) {
+fun WikipediaScreen(messageListData : SnapshotStateList<MessageWikipedia>, messageListState : LazyListState,
+                    coroutineScope: CoroutineScope, continueVisible: Boolean) {
     Column(modifier = Modifier.fillMaxSize())
     {
         if (continueVisible) {
@@ -56,7 +57,7 @@ fun SensorNetworkScreen(messageListData : SnapshotStateList<MessageSensorNetwork
         }
         LazyColumn (
             state = messageListState,
-            modifier = Modifier.fillMaxWidth().fillMaxHeight().background(MaterialTheme.colorScheme.surface),
+            modifier = Modifier.fillMaxWidth().fillMaxHeight(),
             //contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
         ) {
             itemsIndexed(messageListData) {index, item ->
@@ -65,18 +66,18 @@ fun SensorNetworkScreen(messageListData : SnapshotStateList<MessageSensorNetwork
                     .fillMaxWidth()
                     .background(backgroundColor)
                     .wrapContentHeight()
-                    .padding(horizontal = 16.dp, vertical = 10.dp))
+                    .padding(horizontal = 16.dp, vertical = 2.dp))
                 {
                     Image(
-                        painter = painterResource(R.drawable.iot_icon),
-                        contentDescription = "IoT Icon",
+                        painter = painterResource(R.drawable.web3_icon),
+                        contentDescription = "Web3 Icon",
                         contentScale = ContentScale.FillBounds,
                         modifier = Modifier
                             .height(30.dp)
                             .width(30.dp)
                     )
                     Text("Source: ", style= MaterialTheme.typography.titleMedium)
-                    Text("Sensor Network (Simulated)", style= MaterialTheme.typography.bodyLarge)
+                    Text("Wikipedia", style= MaterialTheme.typography.bodyLarge)
                 }
                 Row (modifier = Modifier
                     .background(backgroundColor)
@@ -84,8 +85,8 @@ fun SensorNetworkScreen(messageListData : SnapshotStateList<MessageSensorNetwork
                     .wrapContentHeight()
                     .padding(horizontal = 8.dp, vertical = 2.dp))
                 {
-                    Text("Ambient Temperature: ", style= MaterialTheme.typography.titleMedium)
-                    Text("${item.temperature}°c" , style= MaterialTheme.typography.bodyLarge)
+                    Text("Event: ", style= MaterialTheme.typography.titleMedium)
+                    Text(item.eventType, style= MaterialTheme.typography.bodyLarge)
                 }
                 Row (modifier = Modifier
                     .background(backgroundColor)
@@ -93,8 +94,8 @@ fun SensorNetworkScreen(messageListData : SnapshotStateList<MessageSensorNetwork
                     .wrapContentHeight()
                     .padding(horizontal = 8.dp, vertical = 2.dp))
                 {
-                    Text("Humidity: ", style= MaterialTheme.typography.titleMedium)
-                    Text("${item.humidity}%", style= MaterialTheme.typography.bodyLarge)
+                    Text("Changed Item: ", style= MaterialTheme.typography.titleMedium)
+                    Text(item.changedItem, style= MaterialTheme.typography.bodyLarge)
                 }
                 Row (modifier = Modifier
                     .background(backgroundColor)
@@ -102,8 +103,8 @@ fun SensorNetworkScreen(messageListData : SnapshotStateList<MessageSensorNetwork
                     .wrapContentHeight()
                     .padding(horizontal = 8.dp, vertical = 2.dp))
                 {
-                    Text("Photosensor: ", style= MaterialTheme.typography.titleMedium)
-                    Text("${item.photosensor} w/m2", style= MaterialTheme.typography.bodyLarge)
+                    Text("Link: ", style= MaterialTheme.typography.titleMedium)
+                    Text(item.link, style= MaterialTheme.typography.bodyLarge)
                 }
                 Row (modifier = Modifier
                     .background(backgroundColor)
@@ -111,29 +112,21 @@ fun SensorNetworkScreen(messageListData : SnapshotStateList<MessageSensorNetwork
                     .wrapContentHeight()
                     .padding(horizontal = 8.dp, vertical = 2.dp))
                 {
-                    Text("Radiation Level: ", style= MaterialTheme.typography.titleMedium)
-                    Text("${item.radiation} millirads/hr", style= MaterialTheme.typography.bodyLarge)
+                    Text("User: ", style= MaterialTheme.typography.titleMedium)
+                    Text(item.username, style= MaterialTheme.typography.bodyLarge)
                 }
                 Row (modifier = Modifier
                     .background(backgroundColor)
                     .fillMaxWidth()
                     .wrapContentHeight()
                     .padding(horizontal = 8.dp, vertical = 2.dp))
-                {
-                    Text("Sensor ID: ", style= MaterialTheme.typography.titleMedium)
-                    Text(item.sensorId, style= MaterialTheme.typography.bodyLarge)
-                }
-                Row (modifier = Modifier
-                    .background(backgroundColor)
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .padding(horizontal = 8.dp, vertical = 10.dp))
                 {
                     Text("Timestamp: ", style= MaterialTheme.typography.titleMedium)
                     val sdf = SimpleDateFormat("yyyy MMMM dd HH:mm:ss")
                     val messageDate = item.timetoken?.let { Date(it/10000) }
                     Text(sdf.format(messageDate), style= MaterialTheme.typography.bodyLarge)
                 }
+                Spacer(modifier = Modifier.height(20.dp))
             }
         }
     }

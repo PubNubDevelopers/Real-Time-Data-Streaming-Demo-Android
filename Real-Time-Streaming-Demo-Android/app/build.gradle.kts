@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    namespace = "com.pubnub.devrel.realtimestreaming"
+    namespace = "com.darryncampbell.devrel.realtimestreaming"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.pubnub.devrel.realtimestreaming"
+        applicationId = "com.darryncampbell.devrel.realtimestreaming"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

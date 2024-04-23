@@ -1,4 +1,4 @@
-package com.pubnub.devrel.realtimestreaming.messages
+package com.darryncampbell.devrel.realtimestreaming.messages
 
 class MessageTwitter(name: String, id: String, message: String, source: String, country: String, location: String, followers: Long,
                      val timetoken: Long?
